@@ -1,13 +1,4 @@
 pipeline:
-  build:
-    image: quay.io/ukhomeofficedigital/drone-docker
-    environment:
-      - DOCKER_HOST=tcp://172.17.0.1:2375
-    commands:
-      - docker build -t kafkazoo .
-    when:
-      event: [push, tag]
-
   image_to_quay:
     image: quay.io/ukhomeofficedigital/drone-docker
     secrets:
