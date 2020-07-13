@@ -28,6 +28,11 @@ RUN wget --quiet "http://www.apache.org/dyn/closer.cgi?action=download&filename=
 
 VOLUME /var/lib/kafka
 
+RUN adduser -S -D -H 1000
+RUN chown -R 1000 /opt
+
+USER 1000
+
 CMD sed -i "s|^broker.id=.*$|broker.id=$BROKER_ID|" /opt/kafka/config/server.properties && \
     /opt/kafka/bin/zookeeper-server-start.sh -daemon /opt/kafka/config/zookeeper.properties && \
     /opt/kafka/bin/kafka-server-start.sh /opt/kafka/config/server.properties
